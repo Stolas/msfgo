@@ -1,18 +1,9 @@
 package msf
 
-func (msf *Metasploit) GetVersion() (version string, ruby string) {
-	return msf.GetVersionById(0)
-}
+func GetVersion(session MetasploitSession) (version string, ruby string, err error) {
+	versionmap, err := SessionRequest(session, []string{"core.version"})
 
-func (msf *Metasploit) GetVersionById(index int) (version string, ruby string) {
-	session := msf.SessionTokens[index]
-	//if session == nil {
-	//	return nil, nil
-	//}
-	return msf.GetVersionBySession(session)
-}
-
-func (msf *Metasploit) GetVersionBySession(SessionToken string) (version string, ruby string) {
-	versionmap := msf.PackAndSend([]string{"core.version", SessionToken})
-	return versionmap["version"], versionmap["ruby"]
+	version = versionmap["version"]
+	ruby = versionmap["ruby"]
+	return
 }
