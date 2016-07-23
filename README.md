@@ -22,7 +22,7 @@ go get github.com/ugorji/go/codec
     - [ ] Unsetg
     - [ ] Thread List
     - [ ] Thread Kill
-    - [ ] Version
+    - [X] Version
     - [ ] Stop
 - [ ] Console
     - [ ] Create

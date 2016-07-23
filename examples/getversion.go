@@ -7,8 +7,8 @@ import (
 
 func main() {
 	var conn msf.MetasploitConnection
-	conn.Url = "192.168.178.36"
-	conn.Port = 55554
+	conn.Url = "http://192.168.178.36"
+	conn.Port = 55553
 
 	session, err := msf.NewSession(conn, "msf", "msf")
 	if err != nil {

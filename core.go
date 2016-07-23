@@ -1,9 +1,18 @@
 package msf
 
 func GetVersion(session MetasploitSession) (version string, ruby string, err error) {
-	versionmap, err := SessionRequest(session, []string{"core.version"})
+	m, err := SessionRequest(session, []string{"core.version"})
 
-	version = versionmap["version"]
-	ruby = versionmap["ruby"]
+	err = getError(m)
+	if err != nil {
+		return
+	}
+
+	version, err = getString(m, "version")
+	if err != nil {
+		return
+	}
+
+	ruby, err = getString(m, "ruby")
 	return
 }

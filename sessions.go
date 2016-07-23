@@ -1,6 +1,9 @@
 package msf
 
-import "errors"
+import (
+	"errors"
+	"fmt"
+)
 
 type MetasploitSession struct {
 	Connection   *MetasploitConnection
@@ -9,7 +12,7 @@ type MetasploitSession struct {
 
 // NewSession creates a new session, the metasploit API uses the session for almost all functions.
 func NewSession(conn MetasploitConnection, name string, password string) (session *MetasploitSession, err error) {
-	loginresult, err := conn.PackAndSend([]string{"auth.login", name, password})
+	m, err := conn.PackAndSend([]string{"auth.login", name, password})
 	if err != nil {
 		return
 	}
@@ -17,10 +20,18 @@ func NewSession(conn MetasploitConnection, name string, password string) (sessio
 	session = new(MetasploitSession)
 	session.Connection = &conn
 
-	if loginresult["result"] == "success" {
-		session.SessionToken = loginresult["result"]
+	result, err := getString(m, "result")
+	if err != nil {
+		return
+	}
+
+	if result == "success" {
+		var token string
+		token, err = getString(m, "token")
+
+		session.SessionToken = token
 	} else {
-		err = errors.New("Failed to login")
+		err = errors.New(fmt.Sprintf("Invalid result: %s", result))
 	}
 
 	return
@@ -34,7 +45,7 @@ func TerminateOwnSession(sess *MetasploitSession) {
 	TerminateSession(sess, sess.SessionToken)
 }
 
-func SessionRequest(sess MetasploitSession, input []string) (decodedMap map[string]string, err error) {
+func SessionRequest(sess MetasploitSession, input []string) (m interface{}, err error) {
 	input = append(input, sess.SessionToken)
 	return sess.Connection.PackAndSend(input)
 }
