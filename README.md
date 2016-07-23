@@ -8,8 +8,8 @@ go get github.com/ugorji/go/codec
 
 ## Metasploit RPC Modules
 - [ ] Authentication
-    - [ ] Login
-    - [ ] Logout
+    - [X] Login
+    - [X] Logout
     - [ ] Token Add
     - [ ] Token List
     - [ ] Token Remote
