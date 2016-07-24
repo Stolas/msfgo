@@ -46,6 +46,9 @@ func TerminateOwnSession(sess *MetasploitSession) {
 }
 
 func SessionRequest(sess MetasploitSession, input []string) (m interface{}, err error) {
-	input = append(input, sess.SessionToken)
+	input = append(input, "<JUNK>")
+	copy(input[2:], input[1:])
+	input[1] = sess.SessionToken
+
 	return sess.Connection.PackAndSend(input)
 }

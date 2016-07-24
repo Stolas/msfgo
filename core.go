@@ -21,34 +21,26 @@ func Save(session MetasploitSession) (err error) {
 	m, err := SessionRequest(session, []string{"core.save"})
 
 	err = getError(m)
-	if err != nil {
-		return
-	}
+	return
 }
 
 func SetGlobal(session MetasploitSession, name string, value string) (err error) {
 	m, err := SessionRequest(session, []string{"core.setg", name, value})
 
 	err = getError(m)
-	if err != nil {
-		return
-	}
+	return
 }
 
 func UnsetGlobal(session MetasploitSession, name string) (err error) {
 	m, err := SessionRequest(session, []string{"core.unsetg", name})
 
 	err = getError(m)
-	if err != nil {
-		return
-	}
+	return
 }
 
 func Stop(session MetasploitSession) (err error) {
 	m, err := SessionRequest(session, []string{"core.stop"})
 
 	err = getError(m)
-	if err != nil {
-		return
-	}
+	return
 }

@@ -1,5 +1,8 @@
 # msfgo, Metasploit RPC Go client
 
+[![Software License](https://img.shields.io/badge/license-LGPLv3-green.svg)](LICENSE.md)
+[![State](https://img.shields.io/badge/State-Unstable-red.svg)]
+
 As Metasploit RPC relies heavenly on msfpack. You'll need ``github.com/ugorji/go/codec`` thus first run:
 
 ```
@@ -25,10 +28,10 @@ go get github.com/ugorji/go/codec
     - [X] Version
     - [ ] Stop
 - [ ] Console
-    - [ ] Create
+    - [X] Create
     - [ ] Destroy
     - [ ] List
-    - [ ] Write
+    - [X] Write
     - [ ] Read
     - [ ] Session Detach
     - [ ] Session Kill
